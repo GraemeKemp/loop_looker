@@ -125,7 +125,7 @@ view: flat_deals {
     sql: ${TABLE}.time_to_close ;;
   }
 
-  dimension: months_to_close {
+  dimension: months_to_close_it {
 
     type: number
 
@@ -133,15 +133,15 @@ view: flat_deals {
 
   }
 
-  dimension: months_to_close_tier {
+  dimension: months_to_close {
 
     type: tier
 
-    tiers: [1,2,3,4,5,6,7,8,9,10,11,12,13]
+    tiers: [1,2,3,4,5,6,7,8,9,10,11,12]
 
     style: integer
 
-    sql: ${months_to_close} ;;
+    sql: ${months_to_close_it} ;;
 
   }
 
@@ -162,7 +162,7 @@ view: flat_deals {
   }
   measure: total_closed_deals {
     type: count
-    filters: [deal_stage: "Won", deal_stage: "Lost", deal_stage: "Cold"]
+    filters: [deal_stage: "Won, Lost, Cold"]
   }
 
   dimension: vertical {

@@ -15,9 +15,9 @@ explore: flat_companies {}
 explore: flat_contacts {}
 
 explore: flat_deals {
-  join: looker_won_deals {
+  join: looker_cumulative_won {
     type:  left_outer
     relationship:  many_to_one
-    sql_on:  ${flat_deals.deal_name} = ${looker_won_deals.deal_name} ;;
+    sql_on:  ${flat_deals.deal_name} = ${looker_cumulative_won.deal_name} ;;
   }
 }
