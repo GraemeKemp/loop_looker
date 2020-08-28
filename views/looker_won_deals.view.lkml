@@ -21,6 +21,9 @@ view: looker_won_deals {
     dimension: create_month {
       type: date_month
     }
+    measure: won_deal_count {
+      type: count
+    }
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
