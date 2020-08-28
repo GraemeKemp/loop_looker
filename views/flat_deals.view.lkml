@@ -137,7 +137,7 @@ view: flat_deals {
 
     type: tier
 
-    tiers: [1,3,6,12,24]
+    tiers: [1,2,3,4,5,6,7,8,9,10,11,12,13]
 
     style: integer
 
@@ -149,6 +149,20 @@ view: flat_deals {
     type: average
     sql: ${time_to_close} ;;
     value_format: "0.##"
+  }
+
+  measure: total_won_deals{
+    type: count_distinct
+    sql: ${deal_name} ;;
+
+    filters: {
+      field: deal_stage
+      value: "Won"
+    }
+  }
+  measure: total_closed_deals {
+    type: count
+    filters: [deal_stage: "Won", deal_stage: "Lost", deal_stage: "Cold"]
   }
 
   dimension: vertical {

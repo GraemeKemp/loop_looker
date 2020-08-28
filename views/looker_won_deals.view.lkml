@@ -14,7 +14,9 @@ view: looker_won_deals {
         }
       }
     }
-    dimension: deal_name {}
+    dimension: deal_name {
+      primary_key:  yes
+    }
     dimension: close_month {
       type: date_month
     }
@@ -24,6 +26,7 @@ view: looker_won_deals {
     measure: won_deal_count {
       type: count
     }
+
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
