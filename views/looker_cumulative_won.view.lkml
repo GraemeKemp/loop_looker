@@ -2,22 +2,23 @@ view: looker_cumulative_won {
   derived_table: {
     sql:
       SELECT
-      deal_name,
-      create_week,
-    deal_tier,
-    sum(count(deal_name)) OVER (PARTITION BY deal_tier ORDER BY create_week) as cumulative_won_deals
-  FROM growth_data.flat_deals
+        create_date,
+        count(*) as cohort_size
+    FROM flat_deals u
     WHERE deal_pipeline = 'Sales' AND deal_stage = 'Won'
-    OR deal_pipeline = 'Clients'  AND CAST(create_week AS date) > DATE('2019-01-01')
-GROUP BY create_week, deal_tier,deal_name
-ORDER BY create_week DESC;;
+    GROUP BY 1;;
+    }
+    dimension: create_date {
+      type: date
+      primary_key:  yes
   }
-  dimension: deal_name {
-    type:  string
-  }
-  dimension: cumulative_won_deals {
-    type: number
-  }
+    dimension: cohort_size{
+      type: number
+    }
+    measure: total_cohort_size {
+      type: sum
+      sql: ${cohort_size} ;;
+    }
   # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
